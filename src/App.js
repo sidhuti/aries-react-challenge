@@ -1,80 +1,8 @@
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import styled, { createGlobalStyle } from 'styled-components';
+import { ContractBox } from './components/ContractBox';
+import { GlobalStyle, Container, Button, Summary } from './Styles'
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: #1b1b1b;
-    color: #e0e0e0;
-    font-family: Arial, sans-serif;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-`;
-
-const ContractForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #2c2c2c;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 5px;
-  width: 300px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-`;
-
-const Label = styled.label`
-  margin: 10px 0;
-  font-weight: bold;
-`;
-
-const Input = styled.input`
-  margin-left: 10px;
-  padding: 5px;
-  border: none;
-  border-radius: 3px;
-  background-color: #3d3d3d;
-  color: #e0e0e0;
-`;
-
-const Select = styled.select`
-  margin-left: 10px;
-  padding: 5px;
-  border: none;
-  border-radius: 3px;
-  background-color: #3d3d3d;
-  color: #e0e0e0;
-`;
-
-const Button = styled.button`
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
-const Summary = styled.div`
-  margin-top: 20px;
-  text-align: center;
-  background-color: #2c2c2c;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-`;
 
 const App = () => {
   const [contracts, setContracts] = useState([
@@ -145,53 +73,16 @@ const App = () => {
       <Container>
         <h1>Options Strategy Risk & Reward Analysis</h1>
         {contracts.map((contract, index) => (
-          <ContractForm key={index}>
-            <h3>Contract {index + 1}</h3>
-            <Label>
-              Strike Price:
-              <Input
-                type="number"
-                value={contract.strike_price}
-                onChange={(e) => handleChange(index, 'strike_price', e.target.value)}
-              />
-            </Label>
-            <Label>
-              Type:
-              <Select
-                value={contract.type}
-                onChange={(e) => handleChange(index, 'type', e.target.value)}
-              >
-                <option value="Call">Call</option>
-                <option value="Put">Put</option>
-              </Select>
-            </Label>
-            <Label>
-              Bid:
-              <Input
-                type="number"
-                value={contract.bid}
-                onChange={(e) => handleChange(index, 'bid', e.target.value)}
-              />
-            </Label>
-            <Label>
-              Ask:
-              <Input
-                type="number"
-                value={contract.ask}
-                onChange={(e) => handleChange(index, 'ask', e.target.value)}
-              />
-            </Label>
-            <Label>
-              Long/Short:
-              <Select
-                value={contract.long_short}
-                onChange={(e) => handleChange(index, 'long_short', e.target.value)}
-              >
-                <option value="long">Long</option>
-                <option value="short">Short</option>
-              </Select>
-            </Label>
-          </ContractForm>
+          <ContractBox 
+            index={index}
+            onStrikePriceChange={ (e) => handleChange(index, 'strike_price', e.target.value)}
+            onTypeChange={(e) => handleChange(index, 'type', e.target.value)}
+            onBidChange={(e) => handleChange(index, 'bid', e.target.value)}
+            onAskChange={(e) => handleChange(index, 'ask', e.target.value)}
+            onLongShortChange={(e) => handleChange(index, 'long_short', e.target.value)}
+            contract={contract}
+
+          />
         ))}
         <Button onClick={addContract}>Add Contract</Button>
         <LineChart width={800} height={500} data={data}>
