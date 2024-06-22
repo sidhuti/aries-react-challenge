@@ -12,19 +12,14 @@ export const ContractBox = ({ onStrikePriceChange, onTypeChange, onBidChange, on
           <Input
             type="number"
             value={contract.strike_price}
-            onChange={(e) => onStrikePriceChange(index, 'strike_price', e.target.value)}
-                
-                
-                // handleChange()}
+            onChange={onStrikePriceChange}
           />
         </Label>
         <Label>
           Type:
           <Select
             value={contract.type}
-            onChange={(e) => onTypeChange(index, 'type', e.target.value)}
-                
-                // handleChange()}
+            onChange={onTypeChange}
           >
             <option value="Call">Call</option>
             <option value="Put">Put</option>
@@ -35,9 +30,7 @@ export const ContractBox = ({ onStrikePriceChange, onTypeChange, onBidChange, on
           <Input
             type="number"
             value={contract.bid}
-            onChange={(e) => onBidChange(index, 'bid',e.target.value )}
-                
-                // handleChange(index, 'bid', e.target.value)}
+            onChange={onBidChange}
           />
         </Label>
         <Label>
@@ -45,18 +38,14 @@ export const ContractBox = ({ onStrikePriceChange, onTypeChange, onBidChange, on
           <Input
             type="number"
             value={contract.ask}
-            onChange={(e) => onAskChange(index, 'ask', e.target.value)}
-                
-                // handleChange()}
+            onChange={onAskChange}
           />
         </Label>
         <Label>
           Long/Short:
           <Select
             value={contract.long_short}
-            onChange={(e) => onLongShortChange(index, 'long_short', e.target.value)}
-                
-                // handleChange(index, 'long_short', e.target.value)}
+            onChange={onLongShortChange}
           >
             <option value="long">Long</option>
             <option value="short">Short</option>

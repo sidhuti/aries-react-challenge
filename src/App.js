@@ -11,8 +11,8 @@ const App = () => {
     {
       strike_price: 100,
       type: "Call",
-      bid: 10.05,
-      ask: 12.04,
+      bid: 10,
+      ask: 12,
       long_short: "long",
       expiration_date: "2025-12-17T00:00:00Z"
     },
@@ -30,8 +30,8 @@ const App = () => {
     setContracts([...contracts, {
       strike_price: 100,
       type: "Call",
-      bid: 10.05,
-      ask: 12.04,
+      bid: 10,
+      ask: 12,
       long_short: "long",
       expiration_date: "2025-12-17T00:00:00Z"
     }]);
@@ -63,7 +63,7 @@ const App = () => {
       maxLoss = Math.min(maxLoss, profit);
 
       // aproximate breakeven cost to less than 0.1$
-      if (Math.abs(profit) < 0.1) {
+      if (profit <= 0.1 && profit >= 0) {
         breakEvenPoints.add(price.toFixed(2));
       }
     }
