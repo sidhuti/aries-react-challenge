@@ -5,6 +5,8 @@ import { GlobalStyle, Container, Button, Summary } from './Styles'
 
 
 const App = () => {
+
+  // initial contract with default value
   const [contracts, setContracts] = useState([
     {
       strike_price: 100,
@@ -16,12 +18,14 @@ const App = () => {
     },
   ]);
 
+  // computec hanges to bid, strikeprice etc
   const handleChange = (index, field, value) => {
     const newContracts = [...contracts];
     newContracts[index][field] = field === 'strike_price' || field === 'bid' || field === 'ask' ? parseFloat(value) : value;
     setContracts(newContracts);
   };
 
+  // Add new contract with default values.
   const addContract = () => {
     setContracts([...contracts, {
       strike_price: 100,
@@ -41,6 +45,7 @@ const App = () => {
     const minPrice = 0;
     const maxPrice = Math.max(...contracts.map(c => c.strike_price)) * 2;
 
+    // Calculate profit/loss for each price point
     for (let price = minPrice; price <= maxPrice; price += 1) {
       let profit = 0;
       contracts.forEach(contract => {
@@ -57,6 +62,7 @@ const App = () => {
       maxProfit = Math.max(maxProfit, profit);
       maxLoss = Math.min(maxLoss, profit);
 
+      // aproximate breakeven cost to less than 0.1$
       if (Math.abs(profit) < 0.1) {
         breakEvenPoints.add(price.toFixed(2));
       }
